@@ -80,7 +80,7 @@ func (p *Provider) Transcribe(ctx context.Context, audio []byte, config stt.Tran
 	// Transcribe from stream (bytes)
 	resp, err := dg.FromStream(ctx, bytes.NewReader(audio), opts)
 	if err != nil {
-		return nil, fmt.Errorf("deepgram transcription failed: %w", err)
+		return nil, omnivoice.ClassifyError("Transcribe", err)
 	}
 
 	// Convert response to OmniVoice result
@@ -102,7 +102,7 @@ func (p *Provider) TranscribeFile(ctx context.Context, filePath string, config s
 	// Transcribe from file
 	resp, err := dg.FromFile(ctx, filePath, opts)
 	if err != nil {
-		return nil, fmt.Errorf("deepgram file transcription failed: %w", err)
+		return nil, omnivoice.ClassifyError("TranscribeFile", err)
 	}
 
 	// Convert response to OmniVoice result
@@ -124,7 +124,7 @@ func (p *Provider) TranscribeURL(ctx context.Context, url string, config stt.Tra
 	// Transcribe from URL
 	resp, err := dg.FromURL(ctx, url, opts)
 	if err != nil {
-		return nil, fmt.Errorf("deepgram URL transcription failed: %w", err)
+		return nil, omnivoice.ClassifyError("TranscribeURL", err)
 	}
 
 	// Convert response to OmniVoice result
@@ -151,13 +151,13 @@ func (p *Provider) TranscribeStream(ctx context.Context, config stt.Transcriptio
 	dgClient, err := client.NewWSUsingCallbackWithDefaults(ctx, dgOptions, handler)
 	if err != nil {
 		close(eventCh)
-		return nil, nil, fmt.Errorf("failed to create Deepgram client: %w", err)
+		return nil, nil, omnivoice.ClassifyError("TranscribeStream", err)
 	}
 
 	// Connect to Deepgram
 	if !dgClient.Connect() {
 		close(eventCh)
-		return nil, nil, fmt.Errorf("failed to connect to Deepgram")
+		return nil, nil, omnivoice.ClassifyError("TranscribeStream", fmt.Errorf("failed to connect to Deepgram"))
 	}
 
 	// Create the audio writer
@@ -340,9 +340,10 @@ func (h *callbackHandler) Error(er *wsinterfaces.ErrorResponse) error {
 		return nil
 	}
 
+	err := fmt.Errorf("deepgram error: %s", er.Description)
 	event := stt.StreamEvent{
 		Type:  stt.EventError,
-		Error: fmt.Errorf("deepgram error: %s", er.Description),
+		Error: omnivoice.ClassifyError("TranscribeStream", err),
 	}
 
 	select {

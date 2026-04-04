@@ -87,7 +87,7 @@ func (p *Provider) Synthesize(ctx context.Context, text string, config tts.Synth
 	var buffer interfaces.RawResponse
 	resp, err := p.client.ToStream(ctx, text, opts, &buffer)
 	if err != nil {
-		return nil, fmt.Errorf("deepgram TTS failed: %w", err)
+		return nil, omnivoice.ClassifyError("Synthesize", err)
 	}
 
 	// Determine output format
@@ -127,13 +127,13 @@ func (p *Provider) SynthesizeStream(ctx context.Context, text string, config tts
 	wsClient, err := speak.NewWSUsingCallback(ctx, p.apiKey, &interfaces.ClientOptions{}, opts, handler)
 	if err != nil {
 		close(chunkCh)
-		return nil, fmt.Errorf("failed to create Deepgram TTS client: %w", err)
+		return nil, omnivoice.ClassifyError("SynthesizeStream", err)
 	}
 
 	// Connect to Deepgram
 	if !wsClient.Connect() {
 		close(chunkCh)
-		return nil, fmt.Errorf("failed to connect to Deepgram TTS")
+		return nil, omnivoice.ClassifyError("SynthesizeStream", fmt.Errorf("failed to connect to Deepgram TTS"))
 	}
 
 	// Send text and manage connection in goroutine
@@ -206,13 +206,13 @@ func (p *Provider) SynthesizeFromReader(ctx context.Context, reader io.Reader, c
 	wsClient, err := speak.NewWSUsingCallback(ctx, p.apiKey, &interfaces.ClientOptions{}, opts, handler)
 	if err != nil {
 		close(chunkCh)
-		return nil, fmt.Errorf("failed to create Deepgram TTS client: %w", err)
+		return nil, omnivoice.ClassifyError("SynthesizeStream", err)
 	}
 
 	// Connect to Deepgram
 	if !wsClient.Connect() {
 		close(chunkCh)
-		return nil, fmt.Errorf("failed to connect to Deepgram TTS")
+		return nil, omnivoice.ClassifyError("SynthesizeStream", fmt.Errorf("failed to connect to Deepgram TTS"))
 	}
 
 	// Process text from reader in goroutine
@@ -408,8 +408,9 @@ func (h *ttsCallbackHandler) Error(er *wsinterfaces.ErrorResponse) error {
 		return nil
 	}
 
+	err := fmt.Errorf("deepgram TTS error: %s", er.Description)
 	h.sendChunk(tts.StreamChunk{
-		Error: fmt.Errorf("deepgram TTS error: %s", er.Description),
+		Error: omnivoice.ClassifyError("SynthesizeStream", err),
 	})
 	return nil
 }
