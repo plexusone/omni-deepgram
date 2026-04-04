@@ -4,7 +4,7 @@ go 1.25.0
 
 require (
 	github.com/deepgram/deepgram-go-sdk/v3 v3.5.0
-	github.com/plexusone/omnivoice-core v0.7.0
+	github.com/plexusone/omnivoice-core v0.8.0
 )
 
 require (
