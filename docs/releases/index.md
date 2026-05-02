@@ -27,4 +27,4 @@ This project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html):
 
 ## Changelog
 
-For detailed changes, see [CHANGELOG.md](https://github.com/plexusone/omnivoice-deepgram/blob/main/CHANGELOG.md).
+For detailed changes, see [CHANGELOG.md](https://github.com/plexusone/omni-deepgram/blob/main/CHANGELOG.md).
