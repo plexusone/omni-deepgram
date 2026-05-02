@@ -23,7 +23,7 @@
  [loc-svg]: https://tokei.rs/b1/github/plexusone/omni-deepgram
  [repo-url]: https://github.com/plexusone/omni-deepgram
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/plexusone/omni-deepgram/blob/master/LICENSE
+ [license-url]: https://github.com/plexusone/omni-deepgram/blob/main/LICENSE
 
 OmniVoice provider implementation for [Deepgram](https://deepgram.com/) speech-to-text and text-to-speech services.
 
