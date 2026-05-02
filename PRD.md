@@ -1,6 +1,6 @@
 # OmniVoice Deepgram Provider - Product Requirements Document
 
-This document defines the feature scope for the omnivoice-deepgram provider, mapping capabilities across OmniVoice interfaces, the Deepgram SDK, and the current implementation status.
+This document defines the feature scope for the omni-deepgram provider, mapping capabilities across OmniVoice interfaces, the Deepgram SDK, and the current implementation status.
 
 ## Feature Matrix
 
@@ -16,7 +16,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### Core STT Methods
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | `Transcribe` (batch from bytes) | [x] | [x] | [ ] |
 | `TranscribeFile` (from file path) | [x] | [x] | [ ] |
@@ -25,7 +25,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### STT Streaming Features
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | Interim/partial results | [x] | [x] | [x] |
 | Final results | [x] | [x] | [x] |
@@ -35,7 +35,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### STT Configuration Options
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | Language selection | [x] | [x] | [x] |
 | Model selection | [x] | [x] | [x] |
@@ -52,7 +52,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### STT Advanced Features (Deepgram-specific)
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | Smart formatting | N/A | [x] | [ ] |
 | Profanity filtering | N/A | [x] | [ ] |
@@ -71,7 +71,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### Core TTS Methods
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | `Synthesize` (batch, returns bytes) | [x] | [x] | [x] |
 | `SynthesizeStream` (streaming output) | [x] | [x] | [x] |
@@ -81,7 +81,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### TTS Deepgram SDK Methods
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | `ToStream` (REST, to buffer) | N/A | [x] | [x] |
 | `ToFile` (REST, to io.Writer) | N/A | [x] | [ ] |
@@ -94,7 +94,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### TTS Configuration Options
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | Voice/Model selection | [x] | [x] | [x] |
 | Output format | [x] | [x] | [x] |
@@ -107,7 +107,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### TTS WebSocket Events
 
-| Feature | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Feature | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |---------|:-------------------:|:------------:|:------------------:|
 | Open event | N/A | [x] | [x] |
 | Metadata event | N/A | [x] | [x] |
@@ -124,7 +124,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### STT Input Formats
 
-| Format | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Format | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |--------|:-------------------:|:------------:|:------------------:|
 | mu-law (`mulaw`) | [x] | [x] | [x] |
 | A-law (`alaw`) | [x] | [x] | [x] |
@@ -138,7 +138,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### TTS Output Formats
 
-| Format | OmniVoice Interface | Deepgram SDK | omnivoice-deepgram |
+| Format | OmniVoice Interface | Deepgram SDK | omni-deepgram |
 |--------|:-------------------:|:------------:|:------------------:|
 | Linear PCM (`linear16`) | [x] | [x] | [x] |
 | MP3 (`mp3`) | [x] | [x] | [x] |
@@ -154,7 +154,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### STT Models
 
-| Model | Description | omnivoice-deepgram |
+| Model | Description | omni-deepgram |
 |-------|-------------|:------------------:|
 | `nova-2` | Latest general model (default) | [x] |
 | `nova-2-phonecall` | Optimized for phone calls | [x] |
@@ -168,7 +168,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ### TTS Models/Voices
 
-| Model | Description | omnivoice-deepgram |
+| Model | Description | omni-deepgram |
 |-------|-------------|:------------------:|
 | `aura-asteria-en` | Default English voice | [x] |
 | `aura-2-thalia-en` | Aura 2 English voice | [x] |
@@ -218,7 +218,7 @@ This document defines the feature scope for the omnivoice-deepgram provider, map
 
 ## References
 
-- [OmniVoice Repository](https://github.com/agentplexus/omnivoice)
+- [OmniVoice Repository](https://github.com/plexusone/omnivoice)
 - [Deepgram Go SDK](https://github.com/deepgram/deepgram-go-sdk)
 - [Deepgram STT API Docs](https://developers.deepgram.com/docs/getting-started-with-live-streaming-audio)
 - [Deepgram TTS API Docs](https://developers.deepgram.com/docs/text-to-speech)

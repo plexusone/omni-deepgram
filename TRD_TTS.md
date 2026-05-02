@@ -1,6 +1,6 @@
 # Technical Design: TTS Implementation
 
-This document describes the technical implementation plan for adding Text-to-Speech (TTS) capabilities to omnivoice-deepgram, supporting both REST API (non-streaming) and WebSocket (streaming) modes.
+This document describes the technical implementation plan for adding Text-to-Speech (TTS) capabilities to omni-deepgram, supporting both REST API (non-streaming) and WebSocket (streaming) modes.
 
 ## Goals
 
@@ -12,7 +12,7 @@ This document describes the technical implementation plan for adding Text-to-Spe
 ## Architecture Overview
 
 ```
-omnivoice-deepgram/
+omni-deepgram/
 ├── omnivoice/
 │   ├── omnivoice.go          # Shared constants, provider name
 │   ├── convert.go            # STT config conversions (existing)
@@ -84,8 +84,8 @@ package tts
 
 import (
     "context"
-    "github.com/agentplexus/omnivoice-deepgram/omnivoice"
-    "github.com/agentplexus/omnivoice/tts"
+    "github.com/plexusone/omni-deepgram/omnivoice"
+    "github.com/plexusone/omnivoice/tts"
     speak "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/speak"
     speakapi "github.com/deepgram/deepgram-go-sdk/v3/pkg/api/speak/v1/rest"
     interfaces "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/interfaces"
@@ -471,4 +471,4 @@ func TestSynthesizeIntegration(t *testing.T) {
 - [Deepgram TTS REST API](https://developers.deepgram.com/reference/text-to-speech-api)
 - [Deepgram TTS WebSocket API](https://developers.deepgram.com/reference/transform-text-to-speech-websocket)
 - [Deepgram Go SDK Examples](https://github.com/deepgram/deepgram-go-sdk/tree/main/examples/text-to-speech)
-- [OmniVoice TTS Interface](https://github.com/agentplexus/omnivoice/blob/main/tts/tts.go)
+- [OmniVoice TTS Interface](https://github.com/plexusone/omnivoice/blob/main/tts/tts.go)

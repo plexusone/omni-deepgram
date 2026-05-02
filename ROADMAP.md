@@ -1,6 +1,6 @@
 # Roadmap
 
-This document tracks planned features and improvements for omnivoice-deepgram.
+This document tracks planned features and improvements for omni-deepgram.
 
 ## Planned
 
