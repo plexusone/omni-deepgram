@@ -8,30 +8,30 @@
 [![Visualization][viz-svg]][viz-url]
 [![License][license-svg]][license-url]
 
- [go-ci-svg]: https://github.com/plexusone/omnivoice-deepgram/actions/workflows/go-ci.yaml/badge.svg?branch=main
- [go-ci-url]: https://github.com/plexusone/omnivoice-deepgram/actions/workflows/go-ci.yaml
- [go-lint-svg]: https://github.com/plexusone/omnivoice-deepgram/actions/workflows/go-lint.yaml/badge.svg?branch=main
- [go-lint-url]: https://github.com/plexusone/omnivoice-deepgram/actions/workflows/go-lint.yaml
- [go-sast-svg]: https://github.com/plexusone/omnivoice-deepgram/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
- [go-sast-url]: https://github.com/plexusone/omnivoice-deepgram/actions/workflows/go-sast-codeql.yaml
- [goreport-svg]: https://goreportcard.com/badge/github.com/plexusone/omnivoice-deepgram
- [goreport-url]: https://goreportcard.com/report/github.com/plexusone/omnivoice-deepgram
- [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/plexusone/omnivoice-deepgram
- [docs-godoc-url]: https://pkg.go.dev/github.com/plexusone/omnivoice-deepgram
+ [go-ci-svg]: https://github.com/plexusone/omni-deepgram/actions/workflows/go-ci.yaml/badge.svg?branch=main
+ [go-ci-url]: https://github.com/plexusone/omni-deepgram/actions/workflows/go-ci.yaml
+ [go-lint-svg]: https://github.com/plexusone/omni-deepgram/actions/workflows/go-lint.yaml/badge.svg?branch=main
+ [go-lint-url]: https://github.com/plexusone/omni-deepgram/actions/workflows/go-lint.yaml
+ [go-sast-svg]: https://github.com/plexusone/omni-deepgram/actions/workflows/go-sast-codeql.yaml/badge.svg?branch=main
+ [go-sast-url]: https://github.com/plexusone/omni-deepgram/actions/workflows/go-sast-codeql.yaml
+ [goreport-svg]: https://goreportcard.com/badge/github.com/plexusone/omni-deepgram
+ [goreport-url]: https://goreportcard.com/report/github.com/plexusone/omni-deepgram
+ [docs-godoc-svg]: https://pkg.go.dev/badge/github.com/plexusone/omni-deepgram
+ [docs-godoc-url]: https://pkg.go.dev/github.com/plexusone/omni-deepgram
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
- [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=plexusone%2Fomnivoice-deepgram
- [loc-svg]: https://tokei.rs/b1/github/plexusone/omnivoice-deepgram
- [repo-url]: https://github.com/plexusone/omnivoice-deepgram
+ [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=plexusone%2Fomni-deepgram
+ [loc-svg]: https://tokei.rs/b1/github/plexusone/omni-deepgram
+ [repo-url]: https://github.com/plexusone/omni-deepgram
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
- [license-url]: https://github.com/plexusone/omnivoice-deepgram/blob/master/LICENSE
+ [license-url]: https://github.com/plexusone/omni-deepgram/blob/master/LICENSE
 
 OmniVoice provider implementation for [Deepgram](https://deepgram.com/) speech-to-text and text-to-speech services.
 
-This package adapts the official [Deepgram Go SDK](https://github.com/deepgram/deepgram-go-sdk) to the [OmniVoice](https://github.com/agentplexus/omnivoice) interfaces, enabling Deepgram's STT and TTS capabilities within the OmniVoice framework.
+This package adapts the official [Deepgram Go SDK](https://github.com/deepgram/deepgram-go-sdk) to the [OmniVoice](https://github.com/plexusone/omnivoice) interfaces, enabling Deepgram's STT and TTS capabilities within the OmniVoice framework.
 
 ## OmniVoice Feature Support
 
-This table shows which [OmniVoice](https://github.com/agentplexus/omnivoice) abstracted capabilities are supported by this provider.
+This table shows which [OmniVoice](https://github.com/plexusone/omnivoice) abstracted capabilities are supported by this provider.
 
 ### Core Voice Capabilities
 
@@ -88,7 +88,7 @@ This table shows which [OmniVoice](https://github.com/agentplexus/omnivoice) abs
 
 | Call System | Supported | Notes |
 |-------------|:---------:|-------|
-| Twilio | — | Use with [omnivoice-twilio](https://github.com/agentplexus/omnivoice-twilio) |
+| Twilio | — | Use with [omnivoice-twilio](https://github.com/plexusone/omnivoice-twilio) |
 | RingCentral | — | Use with call system provider |
 | Zoom | — | Use with call system provider |
 | LiveKit | — | Use with call system provider |
@@ -120,7 +120,7 @@ This table shows which [OmniVoice](https://github.com/agentplexus/omnivoice) abs
 ## Installation
 
 ```bash
-go get github.com/agentplexus/omnivoice-deepgram
+go get github.com/plexusone/omni-deepgram
 ```
 
 ## Usage
@@ -129,8 +129,8 @@ go get github.com/agentplexus/omnivoice-deepgram
 
 ```go
 import (
-    deepgramstt "github.com/agentplexus/omnivoice-deepgram/omnivoice/stt"
-    "github.com/agentplexus/omnivoice/stt"
+    deepgramstt "github.com/plexusone/omni-deepgram/omnivoice/stt"
+    "github.com/plexusone/omnivoice/stt"
 )
 
 // Create provider with API key
@@ -172,8 +172,8 @@ result, err = provider.Transcribe(ctx, audioData, config)
 
 ```go
 import (
-    deepgramstt "github.com/agentplexus/omnivoice-deepgram/omnivoice/stt"
-    "github.com/agentplexus/omnivoice/stt"
+    deepgramstt "github.com/plexusone/omni-deepgram/omnivoice/stt"
+    "github.com/plexusone/omnivoice/stt"
 )
 
 // Create provider with API key
@@ -223,8 +223,8 @@ for event := range events {
 
 ```go
 import (
-    deepgramtts "github.com/agentplexus/omnivoice-deepgram/omnivoice/tts"
-    "github.com/agentplexus/omnivoice/tts"
+    deepgramtts "github.com/plexusone/omni-deepgram/omnivoice/tts"
+    "github.com/plexusone/omnivoice/tts"
 )
 
 // Create TTS provider with API key
@@ -326,7 +326,7 @@ for chunk := range chunkCh {
 
 ### With OmniVoice Pipeline
 
-For a complete voice agent example using Deepgram STT and TTS with Twilio Media Streams, see the [omnivoice-examples](https://github.com/agentplexus/omnivoice-examples) repository.
+For a complete voice agent example using Deepgram STT and TTS with Twilio Media Streams, see the [omnivoice-examples](https://github.com/plexusone/omnivoice-examples) repository.
 
 ## Supported Audio Formats
 
@@ -362,7 +362,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## Related Projects
 
-- [omnivoice](https://github.com/agentplexus/omnivoice) - Voice agent framework interfaces
-- [go-elevenlabs](https://github.com/agentplexus/go-elevenlabs) - ElevenLabs TTS provider
-- [omnivoice-twilio](https://github.com/agentplexus/omnivoice-twilio) - Twilio Media Streams transport
-- [omnivoice-examples](https://github.com/agentplexus/omnivoice-examples) - Complete voice agent examples
+- [omnivoice](https://github.com/plexusone/omnivoice) - Voice agent framework interfaces
+- [go-elevenlabs](https://github.com/plexusone/go-elevenlabs) - ElevenLabs TTS provider
+- [omnivoice-twilio](https://github.com/plexusone/omnivoice-twilio) - Twilio Media Streams transport
+- [omnivoice-examples](https://github.com/plexusone/omnivoice-examples) - Complete voice agent examples

@@ -35,7 +35,7 @@ This package adapts the official [Deepgram Go SDK](https://github.com/deepgram/d
 ## Installation
 
 ```bash
-go get github.com/plexusone/omnivoice-deepgram
+go get github.com/plexusone/omni-deepgram
 ```
 
 ## Quick Start
@@ -44,7 +44,7 @@ go get github.com/plexusone/omnivoice-deepgram
 
 ```go
 import (
-    deepgramstt "github.com/plexusone/omnivoice-deepgram/omnivoice/stt"
+    deepgramstt "github.com/plexusone/omni-deepgram/omnivoice/stt"
     "github.com/plexusone/omnivoice-core/stt"
 )
 
@@ -63,7 +63,7 @@ result, err := provider.TranscribeURL(ctx, "https://example.com/audio.mp3", stt.
 
 ```go
 import (
-    deepgramtts "github.com/plexusone/omnivoice-deepgram/omnivoice/tts"
+    deepgramtts "github.com/plexusone/omni-deepgram/omnivoice/tts"
     "github.com/plexusone/omnivoice-core/tts"
 )
 

@@ -1,8 +1,8 @@
 site_name: OmniVoice Deepgram Provider
 site_description: Deepgram STT/TTS provider for OmniVoice framework
-site_url: https://plexusone.github.io/omnivoice-deepgram/
-repo_url: https://github.com/plexusone/omnivoice-deepgram
-repo_name: plexusone/omnivoice-deepgram
+site_url: https://plexusone.github.io/omni-deepgram/
+repo_url: https://github.com/plexusone/omni-deepgram
+repo_name: plexusone/omni-deepgram
 
 theme:
   name: material
@@ -57,4 +57,4 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/plexusone/omnivoice-deepgram
+      link: https://github.com/plexusone/omni-deepgram
