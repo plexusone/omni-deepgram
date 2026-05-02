@@ -1,16 +1,17 @@
 # Release Notes
 
-All releases of OmniVoice Deepgram Provider.
+All releases of Omni-Deepgram.
 
 ## Latest Release
 
-- [v0.5.0](v0.5.0.md) - 2026-04-04 - AX error classification
+- [v0.6.0](v0.6.0.md) - 2026-05-02 - Module rename to omni-deepgram
 
 ## All Releases
 
 | Version | Date | Highlights |
 |---------|------|------------|
-| [v0.5.0](v0.5.0.md) | 2026-04-04 | AX error classification for machine-readable error handling |
+| [v0.6.0](v0.6.0.md) | 2026-05-02 | Module rename from omnivoice-deepgram to omni-deepgram |
+| [v0.5.0](v0.5.0.md) | 2026-04-05 | AX error classification for machine-readable error handling |
 | [v0.4.0](v0.4.0.md) | 2026-02-28 | Organization rename to plexusone |
 | [v0.3.1](v0.3.1.md) | 2026-02-22 | TTS streaming enhancements |
 | [v0.3.0](v0.3.0.md) | 2026-02-14 | WebSocket TTS streaming support |

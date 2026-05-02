@@ -1,11 +1,26 @@
 {
   "irVersion": "1.0",
-  "project": "omnivoice-deepgram",
-  "repository": "https://github.com/plexusone/omnivoice-deepgram",
+  "project": "omni-deepgram",
+  "repository": "https://github.com/plexusone/omni-deepgram",
   "versioning": "semver",
   "commitConvention": "conventional",
   "maintainers": ["johncwang@gmail.com"],
   "releases": [
+    {
+      "version": "v0.6.0",
+      "date": "2026-05-02",
+      "highlights": [
+        { "description": "Module rename from omnivoice-deepgram to omni-deepgram" }
+      ],
+      "changed": [
+        { "description": "**Breaking**: Module path changed from `github.com/plexusone/omnivoice-deepgram` to `github.com/plexusone/omni-deepgram`", "commit": "37d2997" }
+      ],
+      "documentation": [
+        { "description": "Update README, MkDocs, and all documentation for new module name", "commit": "c809700" },
+        { "description": "Update historical release notes for consistency", "commit": "17c6d77" },
+        { "description": "Update design documents (PRD, ROADMAP, TRD_TTS)", "commit": "91449fa" }
+      ]
+    },
     {
       "version": "v0.5.0",
       "date": "2026-04-05",
@@ -70,7 +85,7 @@
         { "description": "README updated with batch transcription examples", "commit": "fe09c20" }
       ],
       "dependencies": [
-        { "description": "Bump `github.com/agentplexus/omnivoice` from v0.3.0 to v0.4.1", "commit": "35c593e" }
+        { "description": "Bump `github.com/plexusone/omnivoice` from v0.3.0 to v0.4.1", "commit": "35c593e" }
       ]
     },
     {
@@ -109,7 +124,7 @@
         { "description": "Integration tests for TTS (requires DEEPGRAM_API_KEY)", "commit": "854e14d" }
       ],
       "dependencies": [
-        { "description": "Bump `github.com/agentplexus/omnivoice` from v0.2.0 to v0.3.0", "commit": "0f554ae" }
+        { "description": "Bump `github.com/plexusone/omnivoice` from v0.2.0 to v0.3.0", "commit": "0f554ae" }
       ]
     },
     {

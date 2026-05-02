@@ -1,4 +1,4 @@
-site_name: OmniVoice Deepgram Provider
+site_name: Omni-Deepgram
 site_description: Deepgram STT/TTS provider for OmniVoice framework
 site_url: https://plexusone.github.io/omni-deepgram/
 repo_url: https://github.com/plexusone/omni-deepgram
@@ -47,6 +47,7 @@ nav:
   - Home: index.md
   - Releases:
     - Overview: releases/index.md
+    - v0.6.0: releases/v0.6.0.md
     - v0.5.0: releases/v0.5.0.md
     - v0.4.0: releases/v0.4.0.md
     - v0.3.1: releases/v0.3.1.md
