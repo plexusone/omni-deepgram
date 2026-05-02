@@ -1,4 +1,4 @@
-module github.com/plexusone/omnivoice-deepgram
+module github.com/plexusone/omni-deepgram
 
 go 1.26.0
 

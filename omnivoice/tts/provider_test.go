@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
+	"github.com/plexusone/omni-deepgram/omnivoice"
 	"github.com/plexusone/omnivoice-core/tts"
-	"github.com/plexusone/omnivoice-deepgram/omnivoice"
 )
 
 func TestNew(t *testing.T) {

@@ -13,8 +13,8 @@ import (
 	wsinterfaces "github.com/deepgram/deepgram-go-sdk/v3/pkg/api/listen/v1/websocket/interfaces"
 	interfaces "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/interfaces"
 	client "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/listen"
+	"github.com/plexusone/omni-deepgram/omnivoice"
 	"github.com/plexusone/omnivoice-core/stt"
-	"github.com/plexusone/omnivoice-deepgram/omnivoice"
 )
 
 // Verify interface compliance at compile time.

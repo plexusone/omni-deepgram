@@ -8,7 +8,7 @@
 // For STT (Speech-to-Text):
 //
 //	import (
-//	    "github.com/plexusone/omnivoice-deepgram/omnivoice/stt"
+//	    "github.com/plexusone/omni-deepgram/omnivoice/stt"
 //	    "github.com/plexusone/omnivoice-core/stt"
 //	)
 //
