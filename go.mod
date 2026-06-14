@@ -3,7 +3,7 @@ module github.com/plexusone/omni-deepgram
 go 1.26.0
 
 require (
-	github.com/deepgram/deepgram-go-sdk/v3 v3.6.0
+	github.com/deepgram/deepgram-go-sdk/v3 v3.7.0
 	github.com/plexusone/omnivoice-core v0.9.0
 )
 
