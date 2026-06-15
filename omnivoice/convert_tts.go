@@ -2,6 +2,7 @@ package omnivoice
 
 import (
 	interfaces "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/interfaces"
+	"github.com/plexusone/omnivoice-core/audio/format"
 	"github.com/plexusone/omnivoice-core/tts"
 )
 
@@ -14,13 +15,13 @@ func ConfigToSpeakOptions(config tts.SynthesisConfig) *interfaces.SpeakOptions {
 	}
 
 	// For raw audio formats: set container=none for telephony use.
-	if isRawEncoding(encoding) {
+	if format.IsRawEncoding(encoding) {
 		opts.Container = "none"
 	}
 
 	// MP3 doesn't support sample_rate or container options.
 	// Other formats (including raw and container) can use sample_rate.
-	if encoding != "mp3" {
+	if format.Encoding(encoding).Normalize() != format.MP3 {
 		opts.SampleRate = config.SampleRate
 	}
 
@@ -36,16 +37,6 @@ func ConfigToSpeakOptions(config tts.SynthesisConfig) *interfaces.SpeakOptions {
 	}
 
 	return opts
-}
-
-// isRawEncoding returns true if the encoding is a raw audio format (no container).
-func isRawEncoding(encoding string) bool {
-	switch encoding {
-	case "linear16", "mulaw", "alaw":
-		return true
-	default:
-		return false
-	}
 }
 
 // ConfigToWSSpeakOptions converts OmniVoice SynthesisConfig to Deepgram WSSpeakOptions.
@@ -70,29 +61,16 @@ func ConfigToWSSpeakOptions(config tts.SynthesisConfig) *interfaces.WSSpeakOptio
 }
 
 // mapTTSEncoding maps OmniVoice output format names to Deepgram encoding strings.
-func mapTTSEncoding(format string) string {
-	switch format {
-	case "mp3":
-		return "mp3"
-	case "linear16", "pcm", "pcm_s16le", "wav":
-		return "linear16"
-	case "mulaw", "ulaw", "g711u", "pcm_mulaw":
-		return "mulaw"
-	case "alaw", "g711a", "pcm_alaw":
-		return "alaw"
-	case "opus":
-		return "opus"
-	case "flac":
-		return "flac"
-	case "aac":
-		return "aac"
-	default:
-		// Default to linear16 for PCM
-		if format == "" {
-			return "linear16"
-		}
-		return format
+// Uses format.Encoding.Normalize() to handle variations (pcm16→linear16, ulaw→mulaw, etc.).
+func mapTTSEncoding(fmt string) string {
+	if fmt == "" {
+		return string(format.Linear16)
 	}
+	// Handle "wav" specially - it maps to linear16 for Deepgram
+	if fmt == "wav" {
+		return string(format.Linear16)
+	}
+	return string(format.Encoding(fmt).Normalize())
 }
 
 // DefaultTTSModel is the default TTS model to use.

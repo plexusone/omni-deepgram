@@ -5,6 +5,7 @@ import (
 
 	restinterfaces "github.com/deepgram/deepgram-go-sdk/v3/pkg/api/listen/v1/rest/interfaces"
 	interfaces "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/interfaces"
+	"github.com/plexusone/omnivoice-core/audio/format"
 	"github.com/plexusone/omnivoice-core/stt"
 )
 
@@ -62,30 +63,19 @@ func ConfigToLiveTranscriptionOptions(config stt.TranscriptionConfig) *interface
 }
 
 // mapEncoding maps OmniVoice encoding names to Deepgram encoding strings.
-func mapEncoding(encoding string) string {
-	switch encoding {
-	case "mulaw", "ulaw", "g711u", "pcm_mulaw":
-		return "mulaw"
-	case "alaw", "g711a", "pcm_alaw":
-		return "alaw"
-	case "linear16", "pcm", "pcm_s16le":
-		return "linear16"
-	case "flac":
-		return "flac"
-	case "opus":
-		return "opus"
+// Uses format.Encoding.Normalize() to handle variations (pcm16→linear16, ulaw→mulaw, etc.).
+func mapEncoding(enc string) string {
+	if enc == "" {
+		return string(format.Linear16)
+	}
+	// Handle Deepgram-specific formats not in omnivoice-core
+	switch enc {
 	case "speex":
 		return "speex"
-	case "mp3":
-		return "mp3"
 	case "webm":
 		return "webm"
 	default:
-		// Default to linear16 for PCM
-		if encoding == "" {
-			return "linear16"
-		}
-		return encoding
+		return string(format.Encoding(enc).Normalize())
 	}
 }
 
