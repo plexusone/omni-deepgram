@@ -7,10 +7,21 @@ import (
 
 // ConfigToSpeakOptions converts OmniVoice SynthesisConfig to Deepgram SpeakOptions.
 func ConfigToSpeakOptions(config tts.SynthesisConfig) *interfaces.SpeakOptions {
+	encoding := mapTTSEncoding(config.OutputFormat)
 	opts := &interfaces.SpeakOptions{
-		Model:      config.Model,
-		Encoding:   mapTTSEncoding(config.OutputFormat),
-		SampleRate: config.SampleRate,
+		Model:    config.Model,
+		Encoding: encoding,
+	}
+
+	// For raw audio formats: set container=none for telephony use.
+	if isRawEncoding(encoding) {
+		opts.Container = "none"
+	}
+
+	// MP3 doesn't support sample_rate or container options.
+	// Other formats (including raw and container) can use sample_rate.
+	if encoding != "mp3" {
+		opts.SampleRate = config.SampleRate
 	}
 
 	// If VoiceID provided but Model not set, use VoiceID as model
@@ -25,6 +36,16 @@ func ConfigToSpeakOptions(config tts.SynthesisConfig) *interfaces.SpeakOptions {
 	}
 
 	return opts
+}
+
+// isRawEncoding returns true if the encoding is a raw audio format (no container).
+func isRawEncoding(encoding string) bool {
+	switch encoding {
+	case "linear16", "mulaw", "alaw":
+		return true
+	default:
+		return false
+	}
 }
 
 // ConfigToWSSpeakOptions converts OmniVoice SynthesisConfig to Deepgram WSSpeakOptions.

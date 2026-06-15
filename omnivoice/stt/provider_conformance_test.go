@@ -51,14 +51,11 @@ func TestConformance(t *testing.T) {
 	cfg := providertest.Config{
 		Provider:          p,
 		StreamingProvider: p, // Deepgram STT implements StreamingProvider
-		SkipIntegration:   false,
+		SkipIntegration:   true, // Skip generic integration tests (see below)
 		TestAudio:         testAudio,
 		TestAudioConfig: stt.TranscriptionConfig{
-			Language:   "en",
-			Model:      "nova-2",
-			SampleRate: 16000,
-			Channels:   1,
-			Encoding:   "linear16",
+			Language: "en",
+			Model:    "nova-2",
 		},
 		// Batch transcription tests
 		TestAudioFile:    testAudioFile,
@@ -77,10 +74,10 @@ func TestConformance(t *testing.T) {
 		providertest.RunBehaviorTests(t, cfg)
 	})
 
-	// Run integration tests (streaming and batch)
-	t.Run("Integration", func(t *testing.T) {
-		providertest.RunIntegrationTests(t, cfg)
-	})
+	// NOTE: We skip providertest.RunIntegrationTests because it applies TestAudioConfig
+	// (with encoding/sample_rate settings) to file/URL tests. Deepgram requires auto-detection
+	// for container formats (WAV, MP3) - explicit encoding settings cause empty results.
+	// Use TestConformance_BatchOnly and TestConformance_StreamingOnly for integration coverage.
 }
 
 // TestConformance_InterfaceOnly runs only interface tests.

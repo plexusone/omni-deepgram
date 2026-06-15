@@ -204,7 +204,20 @@ func ConfigToPreRecordedOptions(config stt.TranscriptionConfig) *interfaces.PreR
 		Utterances:  true, // Always enable for segment boundaries
 	}
 
-	// Set defaults
+	// Only set audio format options if explicitly provided.
+	// For container formats (WAV, MP3, etc.), Deepgram auto-detects from headers.
+	// These are only needed for raw audio formats (mulaw, linear16, etc.).
+	if config.Encoding != "" {
+		opts.Encoding = mapEncoding(config.Encoding)
+	}
+	if config.SampleRate > 0 {
+		opts.SampleRate = config.SampleRate
+	}
+	if config.Channels > 0 {
+		opts.Channels = config.Channels
+	}
+
+	// Set model default
 	if opts.Model == "" {
 		opts.Model = "nova-2"
 	}
