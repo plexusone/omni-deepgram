@@ -50,7 +50,7 @@ func TestConformance(t *testing.T) {
 
 	cfg := providertest.Config{
 		Provider:          p,
-		StreamingProvider: p, // Deepgram STT implements StreamingProvider
+		StreamingProvider: p,    // Deepgram STT implements StreamingProvider
 		SkipIntegration:   true, // Skip generic integration tests (see below)
 		TestAudio:         testAudio,
 		TestAudioConfig: stt.TranscriptionConfig{
