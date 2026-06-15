@@ -13,7 +13,7 @@ import (
 func ConfigToLiveTranscriptionOptions(config stt.TranscriptionConfig) *interfaces.LiveTranscriptionOptions {
 	opts := &interfaces.LiveTranscriptionOptions{
 		// Audio format
-		Encoding:   mapEncoding(config.Encoding),
+		Encoding:   normalizeEncoding(config.Encoding),
 		SampleRate: config.SampleRate,
 		Channels:   config.Channels,
 
@@ -62,21 +62,13 @@ func ConfigToLiveTranscriptionOptions(config stt.TranscriptionConfig) *interface
 	return opts
 }
 
-// mapEncoding maps OmniVoice encoding names to Deepgram encoding strings.
-// Uses format.Encoding.Normalize() to handle variations (pcm16→linear16, ulaw→mulaw, etc.).
-func mapEncoding(enc string) string {
+// normalizeEncoding normalizes an encoding string using omnivoice-core's format package.
+// Returns linear16 as default for empty input.
+func normalizeEncoding(enc string) string {
 	if enc == "" {
 		return string(format.Linear16)
 	}
-	// Handle Deepgram-specific formats not in omnivoice-core
-	switch enc {
-	case "speex":
-		return "speex"
-	case "webm":
-		return "webm"
-	default:
-		return string(format.Encoding(enc).Normalize())
-	}
+	return string(format.Encoding(enc).Normalize())
 }
 
 // MessageResponseToStreamEvent converts a Deepgram MessageResponse to an OmniVoice stream event.
@@ -198,7 +190,7 @@ func ConfigToPreRecordedOptions(config stt.TranscriptionConfig) *interfaces.PreR
 	// For container formats (WAV, MP3, etc.), Deepgram auto-detects from headers.
 	// These are only needed for raw audio formats (mulaw, linear16, etc.).
 	if config.Encoding != "" {
-		opts.Encoding = mapEncoding(config.Encoding)
+		opts.Encoding = normalizeEncoding(config.Encoding)
 	}
 	if config.SampleRate > 0 {
 		opts.SampleRate = config.SampleRate

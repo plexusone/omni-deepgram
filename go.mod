@@ -4,7 +4,7 @@ go 1.26.0
 
 require (
 	github.com/deepgram/deepgram-go-sdk/v3 v3.7.0
-	github.com/plexusone/omnivoice-core v0.12.2-0.20260615020829-48d4fe40a01e
+	github.com/plexusone/omnivoice-core v0.12.2-0.20260615033111-5451f7326e77
 )
 
 require (

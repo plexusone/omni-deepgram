@@ -8,7 +8,7 @@ import (
 
 // ConfigToSpeakOptions converts OmniVoice SynthesisConfig to Deepgram SpeakOptions.
 func ConfigToSpeakOptions(config tts.SynthesisConfig) *interfaces.SpeakOptions {
-	encoding := mapTTSEncoding(config.OutputFormat)
+	encoding := normalizeEncoding(config.OutputFormat)
 	opts := &interfaces.SpeakOptions{
 		Model:    config.Model,
 		Encoding: encoding,
@@ -43,7 +43,7 @@ func ConfigToSpeakOptions(config tts.SynthesisConfig) *interfaces.SpeakOptions {
 func ConfigToWSSpeakOptions(config tts.SynthesisConfig) *interfaces.WSSpeakOptions {
 	opts := &interfaces.WSSpeakOptions{
 		Model:      config.Model,
-		Encoding:   mapTTSEncoding(config.OutputFormat),
+		Encoding:   normalizeEncoding(config.OutputFormat),
 		SampleRate: config.SampleRate,
 	}
 
@@ -58,19 +58,6 @@ func ConfigToWSSpeakOptions(config tts.SynthesisConfig) *interfaces.WSSpeakOptio
 	}
 
 	return opts
-}
-
-// mapTTSEncoding maps OmniVoice output format names to Deepgram encoding strings.
-// Uses format.Encoding.Normalize() to handle variations (pcm16→linear16, ulaw→mulaw, etc.).
-func mapTTSEncoding(fmt string) string {
-	if fmt == "" {
-		return string(format.Linear16)
-	}
-	// Handle "wav" specially - it maps to linear16 for Deepgram
-	if fmt == "wav" {
-		return string(format.Linear16)
-	}
-	return string(format.Encoding(fmt).Normalize())
 }
 
 // DefaultTTSModel is the default TTS model to use.

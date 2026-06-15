@@ -151,7 +151,7 @@ func TestConfigToWSSpeakOptions(t *testing.T) {
 	}
 }
 
-func TestMapTTSEncoding(t *testing.T) {
+func TestNormalizeEncoding(t *testing.T) {
 	tests := []struct {
 		input string
 		want  string
@@ -171,15 +171,17 @@ func TestMapTTSEncoding(t *testing.T) {
 		{"opus", "opus"},
 		{"flac", "flac"},
 		{"aac", "aac"},
+		{"speex", "speex"},
+		{"webm", "webm"},
 		{"", "linear16"},
 		{"unknown", "unknown"},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.input, func(t *testing.T) {
-			got := mapTTSEncoding(tt.input)
+			got := normalizeEncoding(tt.input)
 			if got != tt.want {
-				t.Errorf("mapTTSEncoding(%q) = %q, want %q", tt.input, got, tt.want)
+				t.Errorf("normalizeEncoding(%q) = %q, want %q", tt.input, got, tt.want)
 			}
 		})
 	}
