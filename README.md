@@ -20,7 +20,7 @@
  [docs-mkdoc-url]: https://plexusone.dev/omni-deepgram
  [viz-svg]: https://img.shields.io/badge/visualizaton-Go-blue.svg
  [viz-url]: https://mango-dune-07a8b7110.1.azurestaticapps.net/?repo=plexusone%2Fomnillm
- [loc-svg]: https://tokei.rs/b1/github/plexusone/omnillm
+ [loc-svg]: https://tokei.rs/b1/github/plexusone/omni-deepgram
  [repo-url]: https://github.com/plexusone/omni-deepgram
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/plexusone/omni-deepgram/blob/main/LICENSE
