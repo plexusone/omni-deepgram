@@ -131,8 +131,8 @@ func TestConfigToSettingsOptions(t *testing.T) {
 
 	opts := ConfigToSettingsOptions(cfg, processConfig)
 
-	if opts.Type != "SettingsConfiguration" {
-		t.Errorf("Type = %v, want %v", opts.Type, "SettingsConfiguration")
+	if opts.Type != "Settings" {
+		t.Errorf("Type = %v, want %v", opts.Type, "Settings")
 	}
 	if !opts.Experimental {
 		t.Error("Experimental should be true")

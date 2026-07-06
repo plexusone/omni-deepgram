@@ -5,6 +5,7 @@ import (
 
 	agent "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/agent"
 	interfaces "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/interfaces"
+	interfacesv1 "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/interfaces/v1"
 	corereal "github.com/plexusone/omnivoice-core/realtime"
 )
 
@@ -43,11 +44,11 @@ func ConfigToSettingsOptions(cfg Config, processConfig corereal.ProcessConfig) *
 
 	// Convert functions if provided
 	if len(processConfig.Functions) > 0 {
-		funcs := make([]any, len(processConfig.Functions))
+		funcs := make([]interfacesv1.Functions, len(processConfig.Functions))
 		for i, f := range processConfig.Functions {
-			funcs[i] = functionDeclarationToSDKMap(f)
+			funcs[i] = functionDeclarationToSDK(f)
 		}
-		opts.Agent.Think.Provider["functions"] = funcs
+		opts.Agent.Think.Functions = &funcs
 	}
 
 	// Listen configuration (STT) - use map index pattern
@@ -81,18 +82,18 @@ func ConfigToSettingsOptions(cfg Config, processConfig corereal.ProcessConfig) *
 	return opts
 }
 
-// functionDeclarationToSDKMap converts an omnivoice FunctionDeclaration to a map for Deepgram.
-func functionDeclarationToSDKMap(f corereal.FunctionDeclaration) map[string]any {
-	fn := map[string]any{
-		"name":        f.Name,
-		"description": f.Description,
+// functionDeclarationToSDK converts an omnivoice FunctionDeclaration to a Deepgram Functions struct.
+func functionDeclarationToSDK(f corereal.FunctionDeclaration) interfacesv1.Functions {
+	fn := interfacesv1.Functions{
+		Name:        f.Name,
+		Description: f.Description,
 	}
 
 	// Parse JSON Schema parameters if provided
 	if len(f.Parameters) > 0 {
-		var schema map[string]any
-		if err := json.Unmarshal(f.Parameters, &schema); err == nil {
-			fn["parameters"] = schema
+		var params interfacesv1.Parameters
+		if err := json.Unmarshal(f.Parameters, &params); err == nil {
+			fn.Parameters = params
 		}
 	}
 
