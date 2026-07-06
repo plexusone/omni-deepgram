@@ -7,6 +7,35 @@
   "maintainers": ["johncwang@gmail.com"],
   "releases": [
     {
+      "version": "v0.7.0",
+      "date": "2026-07-05",
+      "highlights": [
+        { "description": "Voice Agent realtime provider for native voice-to-voice conversations" }
+      ],
+      "added": [
+        { "description": "Voice Agent realtime provider implementing `corereal.Provider` interface", "file": "omnivoice/realtime/provider.go", "commit": "75b513b" },
+        { "description": "`ProcessAudioStream` for bidirectional audio streaming with ~100-300ms latency", "commit": "75b513b" },
+        { "description": "Channel-based event handler for Deepgram Voice Agent SDK", "file": "omnivoice/realtime/chan_handler.go", "commit": "75b513b" },
+        { "description": "Configuration mapping to Deepgram `SettingsOptions`", "file": "omnivoice/realtime/convert.go", "commit": "75b513b" },
+        { "description": "Gateway factory for provider creation", "file": "omnivoice/realtime/factory.go", "commit": "75b513b" },
+        { "description": "Functional options pattern for configuration", "file": "omnivoice/realtime/options.go", "commit": "75b513b" },
+        { "description": "`InitAgentSDK()` with fix for SDK `flag.Parse()` conflict", "file": "omnivoice/omnivoice.go", "commit": "75b513b" },
+        { "description": "Function calling support during voice conversations", "commit": "75b513b" },
+        { "description": "`deepgram-voice-test` CLI tool for debugging and testing", "file": "cmd/deepgram-voice-test/main.go", "commit": "3219438" }
+      ],
+      "fixed": [
+        { "description": "Use SDK types (`interfacesv1.Functions`) for function declarations instead of `map[string]any`", "commit": "f4c813a" }
+      ],
+      "tests": [
+        { "description": "Unit tests for configuration and options", "file": "omnivoice/realtime/provider_test.go", "commit": "fbe74e7" },
+        { "description": "Integration tests for Voice Agent provider (requires `DEEPGRAM_API_KEY`)", "file": "omnivoice/realtime/provider_integration_test.go", "commit": "fbe74e7" }
+      ],
+      "dependencies": [
+        { "description": "Bump omnivoice-core from v0.13.0 to v0.15.0", "commit": "37783c7" },
+        { "description": "Add spf13/cobra v1.10.2 for CLI tool", "commit": "3219438" }
+      ]
+    },
+    {
       "version": "v0.6.1",
       "date": "2026-06-15",
       "highlights": [

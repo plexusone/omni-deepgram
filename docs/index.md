@@ -25,6 +25,15 @@ This package adapts the official [Deepgram Go SDK](https://github.com/deepgram/d
 - Multiple Aura voices (male/female, US/UK/IE accents)
 - Multiple output formats (mp3, linear16, mulaw, opus, etc.)
 
+### Voice Agent Realtime
+
+- Native voice-to-voice conversations with ~100-300ms latency
+- Bidirectional audio streaming via WebSocket
+- Implements `corereal.Provider` interface from omnivoice-core
+- Function calling support during voice conversations
+- Configurable LLM, STT, and TTS providers
+- Echo cancellation and turn-taking support
+
 ### Agent Experience (AX)
 
 - Error classification with 8 categories (transient, rate_limit, validation, auth, not_found, server, quota, unknown)
@@ -76,6 +85,42 @@ result, err := provider.Synthesize(ctx, "Hello, world!", tts.SynthesisConfig{
     VoiceID:      "aura-asteria-en",
     OutputFormat: "mp3",
 })
+```
+
+### Voice Agent Realtime
+
+```go
+import (
+    "github.com/plexusone/omni-deepgram/omnivoice/realtime"
+    corereal "github.com/plexusone/omnivoice-core/realtime"
+)
+
+provider, err := realtime.New(
+    realtime.WithAPIKey("your-api-key"),
+    realtime.WithGreeting("Hello! How can I help you?"),
+    realtime.WithInputSampleRate(48000),
+)
+if err != nil {
+    log.Fatal(err)
+}
+
+// audioIn is a channel of raw PCM audio bytes from user
+audioCh, transcriptCh, err := provider.ProcessAudioStream(ctx, audioIn, corereal.ProcessConfig{
+    Instructions: "You are a helpful voice assistant.",
+    Voice:        "aura-2-thalia-en",
+})
+
+// Process audio output and transcripts
+for {
+    select {
+    case chunk := <-audioCh:
+        if len(chunk.Audio) > 0 {
+            // Play agent audio response
+        }
+    case transcript := <-transcriptCh:
+        fmt.Printf("[%s] %s\n", roleOf(transcript), transcript.Text)
+    }
+}
 ```
 
 ## Requirements

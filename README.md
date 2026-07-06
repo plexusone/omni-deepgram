@@ -46,7 +46,9 @@ This table shows which [OmniVoice](https://github.com/plexusone/omnivoice) abstr
 | TTS Synthesize | ✅ | Non-streaming via REST API |
 | TTS Streaming | ✅ | Real-time via WebSocket |
 | TTS Voice List | ✅ | Static list of Aura voices |
-| **Voice Agent** | — | N/A (use with agent orchestration) |
+| **Voice Agent Realtime** | ✅ | Native voice-to-voice via Voice Agent API |
+| Realtime Streaming | ✅ | Bidirectional audio via WebSocket |
+| Function Calling | ✅ | Tool use during voice conversations |
 
 ### STT Features
 
@@ -73,6 +75,19 @@ This table shows which [OmniVoice](https://github.com/plexusone/omnivoice) abstr
 | Voice selection | ✅ | Aura 1 and Aura 2 voices |
 | Output formats | ✅ | mp3, linear16, mulaw, alaw, opus, flac |
 | Sample rate control | ✅ | Configurable output sample rate |
+
+### Voice Agent Realtime Features
+
+| Feature | Supported | Notes |
+|---------|:---------:|-------|
+| Native voice-to-voice | ✅ | ~100-300ms latency |
+| Bidirectional streaming | ✅ | Full-duplex audio via WebSocket |
+| Function calling | ✅ | Tool use during conversation |
+| Conversation transcripts | ✅ | User and agent transcripts |
+| Configurable LLM | ✅ | OpenAI, Anthropic, etc. |
+| Configurable TTS | ✅ | Aura voices |
+| Greeting message | ✅ | Agent speaks first |
+| Echo cancellation | ✅ | Via calling application |
 
 ### Transport Layer
 
@@ -116,6 +131,16 @@ This table shows which [OmniVoice](https://github.com/plexusone/omnivoice) abstr
 - Multiple Aura voices (male/female, US/UK/IE accents)
 - Multiple output formats (mp3, linear16, mulaw, opus, etc.)
 - Configurable sample rate
+
+### Voice Agent Realtime
+
+- Native voice-to-voice conversations with ~100-300ms latency
+- Bidirectional audio streaming via Deepgram Voice Agent API
+- Implements `corereal.Provider` interface from omnivoice-core
+- Function calling support during voice conversations
+- Configurable LLM provider (OpenAI, Anthropic, etc.)
+- Agent greeting for conversation initiation
+- Transcript events for both user and agent speech
 
 ## Installation
 
@@ -320,6 +345,68 @@ for chunk := range chunkCh {
     }
     if len(chunk.Audio) > 0 {
         audioPlayer.Write(chunk.Audio)
+    }
+}
+```
+
+### Voice Agent Realtime
+
+Native voice-to-voice conversations with ~100-300ms latency:
+
+```go
+import (
+    "github.com/plexusone/omni-deepgram/omnivoice/realtime"
+    corereal "github.com/plexusone/omnivoice-core/realtime"
+)
+
+// Create realtime provider
+provider, err := realtime.New(
+    realtime.WithAPIKey("your-api-key"),
+    realtime.WithGreeting("Hello! How can I help you?"),
+    realtime.WithInputSampleRate(48000),  // Match your audio source
+)
+if err != nil {
+    log.Fatal(err)
+}
+defer provider.Close()
+
+// audioIn is a channel of raw PCM audio bytes from user
+audioIn := make(chan []byte, 100)
+
+// Start bidirectional audio stream
+audioCh, transcriptCh, err := provider.ProcessAudioStream(ctx, audioIn, corereal.ProcessConfig{
+    Instructions: "You are a helpful voice assistant.",
+    Voice:        "aura-2-thalia-en",
+})
+if err != nil {
+    log.Fatal(err)
+}
+
+// Process audio output and transcripts
+for {
+    select {
+    case <-ctx.Done():
+        return
+    case chunk, ok := <-audioCh:
+        if !ok {
+            return
+        }
+        if len(chunk.Audio) > 0 {
+            // Play agent audio response
+            audioPlayer.Write(chunk.Audio)
+        }
+        if chunk.IsFinal {
+            fmt.Println("Agent finished speaking")
+        }
+    case transcript, ok := <-transcriptCh:
+        if !ok {
+            return
+        }
+        role := "AGENT"
+        if transcript.IsInput {
+            role = "USER"
+        }
+        fmt.Printf("[%s] %s\n", role, transcript.Text)
     }
 }
 ```

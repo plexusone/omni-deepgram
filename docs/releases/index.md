@@ -4,12 +4,14 @@ All releases of Omni-Deepgram.
 
 ## Latest Release
 
-- [v0.6.0](v0.6.0.md) - 2026-05-02 - Module rename to omni-deepgram
+- [v0.7.0](v0.7.0.md) - 2026-07-05 - Voice Agent realtime provider
 
 ## All Releases
 
 | Version | Date | Highlights |
 |---------|------|------------|
+| [v0.7.0](v0.7.0.md) | 2026-07-05 | Voice Agent realtime provider for native voice-to-voice |
+| [v0.6.1](v0.6.1.md) | 2026-06-15 | Fix audio format auto-detection |
 | [v0.6.0](v0.6.0.md) | 2026-05-02 | Module rename from omnivoice-deepgram to omni-deepgram |
 | [v0.5.0](v0.5.0.md) | 2026-04-05 | AX error classification for machine-readable error handling |
 | [v0.4.0](v0.4.0.md) | 2026-02-28 | Organization rename to plexusone |
