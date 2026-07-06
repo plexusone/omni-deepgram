@@ -5,6 +5,7 @@ _*
 *.tar
 coverage.txt
 debug.test
+deepgram-voice-test
 main
 main.zip
 site/
