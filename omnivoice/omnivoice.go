@@ -42,8 +42,10 @@
 package omnivoice
 
 import (
+	"os"
 	"sync"
 
+	agentclient "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/agent"
 	client "github.com/deepgram/deepgram-go-sdk/v3/pkg/client/listen"
 )
 
@@ -56,11 +58,32 @@ const Version = "0.1.0"
 // sdkInitOnce ensures the Deepgram SDK is initialized only once across all providers.
 var sdkInitOnce sync.Once
 
+// sdkAgentInitOnce ensures the Deepgram Agent SDK is initialized only once.
+var sdkAgentInitOnce sync.Once
+
 // InitSDK initializes the Deepgram SDK. Safe to call multiple times.
 func InitSDK() {
 	sdkInitOnce.Do(func() {
 		client.Init(client.InitLib{
 			LogLevel: client.LogLevelDefault,
 		})
+	})
+}
+
+// InitAgentSDK initializes the Deepgram Agent SDK. Safe to call multiple times.
+// Note: The SDK calls flag.Parse() internally, so we temporarily clear os.Args
+// to prevent conflicts with CLI frameworks like Cobra that have already parsed flags.
+func InitAgentSDK() {
+	sdkAgentInitOnce.Do(func() {
+		// Save original args and clear them to prevent SDK from parsing CLI flags
+		origArgs := os.Args
+		os.Args = []string{origArgs[0]}
+
+		agentclient.Init(agentclient.InitLib{
+			LogLevel: agentclient.LogLevelDefault,
+		})
+
+		// Restore original args
+		os.Args = origArgs
 	})
 }
