@@ -98,4 +98,3 @@ func functionDeclarationToSDKMap(f corereal.FunctionDeclaration) map[string]any 
 
 	return fn
 }
-

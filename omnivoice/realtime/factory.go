@@ -25,9 +25,9 @@ func (f *Factory) Create(config *gateway.RealtimeConfig) (corereal.Provider, err
 
 	opts := []Option{
 		WithAPIKey(config.APIKey),
-		WithExperimental(true),       // Enable latency metrics
-		WithInputSampleRate(48000),   // LiveKit sends 48kHz audio
-		WithOutputSampleRate(24000),  // Deepgram outputs 24kHz
+		WithExperimental(true),      // Enable latency metrics
+		WithInputSampleRate(48000),  // LiveKit sends 48kHz audio
+		WithOutputSampleRate(24000), // Deepgram outputs 24kHz
 	}
 
 	if config.Model != "" {
