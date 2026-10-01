@@ -1,6 +1,6 @@
 github.com/cpuguy83/go-md2man/v2 v2.0.6/go.mod h1:oOW0eioCTA6cOiMLiUPZOpcVxMig6NIQQ7OS05n1F4g=
-github.com/deepgram/deepgram-go-sdk/v3 v3.7.1 h1:ntQq6pbf3EopnBWfO39NFL+cy7bflF3flpQRkY74E3Q=
-github.com/deepgram/deepgram-go-sdk/v3 v3.7.1/go.mod h1:wVr0PDvlJFWVLUmf65u+K80SJVf/PUWvkFFubGPW/As=
+github.com/deepgram/deepgram-go-sdk/v3 v3.8.0 h1:C5AwEGrnAHjcofqX2LFXpluhbe0kdoJhzwlHWWcnt2Q=
+github.com/deepgram/deepgram-go-sdk/v3 v3.8.0/go.mod h1:+6C79/7mVLny/gW+6xb1/CI32v+NCs+XlHL+yplnAgc=
 github.com/dvonthenen/websocket v1.5.1-dyv.2 h1:OXlWJJkeHt8k4+MEI0Y8SQjY2ihHYD2z/tI7sZZfsnA=
 github.com/dvonthenen/websocket v1.5.1-dyv.2/go.mod h1:q2GbopbpFJvBP4iqVvqwwahVmvu2HnCfdqCWDoQVKMM=
 github.com/fatih/color v1.19.0 h1:Zp3PiM21/9Ld6FzSKyL5c/BULoe/ONr9KlbYVOfG8+w=
